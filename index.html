@@ -278,6 +278,26 @@
     font-variant-numeric:tabular-nums;
   }
   td.mono{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .size-tag{
+    display:inline-block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    font-weight:600;
+    color:var(--accent);
+    background:var(--surface-2);
+    border:1px solid var(--line);
+    border-radius:5px;
+    padding:1px 6px;
+    margin-right:7px;
+    white-space:nowrap;
+  }
+  .size-tag.unknown{color:var(--ink-soft);}
+  .table-caveat{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin:10px 2px 0;
+    line-height:1.5;
+  }
 
   /* verdict */
   .verdict{
@@ -493,7 +513,7 @@
 
 <section>
   <h2>Comparativo lado a lado</h2>
-  <p class="section-note">Uma linha por opção de cada fornecedor. Menor valor de cada item em verde.</p>
+  <p class="section-note">Uma linha por opção de cada fornecedor. Menor valor em verde — só entre linhas do mesmo tamanho (veja a tag de porte em cada guarda-sol/ombrelone).</p>
   <div class="table-wrap">
     <table>
       <thead>
@@ -539,58 +559,60 @@
         <tr class="group-start">
           <td class="row-label" rowspan="5">Guarda-sol</td>
           <td class="fornecedor">AMVC Lar e Lazer</td>
-          <td>Sombrabella Alumínio — 1,6 m, 4 gomos, 1 cor</td>
+          <td><span class="size-tag">1,6 m</span>Sombrabella Alumínio — 4 gomos, 1 cor</td>
           <td class="mono">R$ 159,90</td>
         </tr>
         <tr>
           <td class="fornecedor">IZY Brindes</td>
-          <td>Poliéster 170T — 30 / 50 / 100 peças</td>
-          <td class="mono">R$ 113,72 / 97,15 / 81,20</td>
+          <td><span class="size-tag">~1,6 m</span>Poliéster 170T (bolsa 1,4×1,6 m) — 30 / 50 / 100 peças</td>
+          <td class="best">R$ 113,72 / 97,15 / 81,20</td>
         </tr>
         <tr>
           <td class="fornecedor">IZY Brindes</td>
-          <td>Aço, 4 gomos — 30 pç (1 gomo) / 50 pç (4 gomos)</td>
-          <td class="best">R$ 92,10 / 58,86</td>
-        </tr>
-        <tr>
-          <td class="fornecedor">Cadeiras Brasil Tropical</td>
-          <td>2,00 m, c/ aba bagum, personalização digital — 10 un</td>
-          <td class="mono">R$ 219,00</td>
+          <td><span class="size-tag unknown">tam. não inf.</span>Aço, 4 gomos — 30 pç (1 gomo) / 50 pç (4 gomos)</td>
+          <td class="mono">R$ 92,10 / 58,86</td>
         </tr>
         <tr>
           <td class="fornecedor">Sungap</td>
-          <td>Ultrafort 200 — 1,60 / 2,00 m, 10 un</td>
+          <td><span class="size-tag unknown">1,6 ou 2,0 m*</span>Ultrafort 200 — 10 un</td>
           <td class="mono">R$ 316,17</td>
+        </tr>
+        <tr>
+          <td class="fornecedor">Cadeiras Brasil Tropical</td>
+          <td><span class="size-tag">2,0 m</span>c/ aba bagum, personalização digital — 10 un</td>
+          <td class="mono">R$ 219,00</td>
         </tr>
         <tr class="group-start">
           <td class="row-label" rowspan="2">Ombrelone</td>
           <td class="fornecedor">Cadeiras Brasil Tropical</td>
-          <td>Madeira redondo 3,00 m, aba bagum intercalada — 10 un</td>
+          <td><span class="size-tag">3,0 m</span>Madeira redondo, aba bagum intercalada — 10 un</td>
           <td class="best">R$ 460,00</td>
         </tr>
         <tr>
           <td class="fornecedor">Sungap</td>
-          <td>Solasol 240 — 2,40 / 3,00 / 4,00 m, 10 un</td>
+          <td><span class="size-tag unknown">2,4 a 4,0 m*</span>Solasol 240 — 10 un</td>
           <td class="mono">R$ 509,50</td>
         </tr>
       </tbody>
     </table>
+    <p class="table-caveat">* Tamanho exato da cotação não especificado pelo fornecedor (catálogo lista uma faixa de tamanhos pelo mesmo preço unitário). Os guarda-sóis <b>não são todos do mesmo porte</b> — 1,6 m é bem menor que 2,0 m — então preço mais baixo não significa necessariamente melhor negócio; compare dentro do mesmo tamanho quando possível.</p>
   </div>
 </section>
 
 <section style="margin-bottom:8px;">
   <div class="verdict">
     <p class="verdict-eyebrow">Recomendação</p>
-    <h3>AMVC Lar e Lazer tem o melhor custo-benefício</h3>
-    <p>Entre os quatro, é a única que entrega <b>alumínio nos dois itens</b> — cadeira e guarda-sol — com pedido mínimo baixo (12 a 18 unidades) e preço combinado de <b>R$ 252,80</b> por conjunto, menos da metade do valor da Sungap (R$ 526,17) e bem abaixo da Cadeiras Brasil Tropical (R$ 387,00) pela mesma qualidade de material.</p>
+    <h3>AMVC Lar e Lazer é o pick mais seguro — mas vale comparar o guarda-sol com a IZY</h3>
+    <p>Na <b>cadeira</b>, a AMVC vence sem ressalvas: R$ 92,90 com alumínio confirmado e pedido mínimo baixo (12–18 un), mais barata que todas as outras. No <b>guarda-sol</b> a conta muda: o modelo da AMVC é 1,6 m por R$ 159,90, mas a IZY Brindes tem um guarda-sol de porte parecido (poliéster 170T, ~1,6 m) saindo por <b>R$ 81,20–113,72</b> — mais barato no mesmo tamanho, só que sem confirmação do material da armação (só a lona é poliéster; a AMVC garante alumínio).</p>
     <ul>
-      <li><b>Vs. IZY Brindes:</b> a IZY vence em preço bruto do guarda-sol, mas só nesse valor com a linha de <b>aço</b> — material mais sujeito a ferrugem/maresia num item que fica exposto na praia. Na linha em alumínio/poliéster equivalente, a diferença para a AMVC cai bastante, e o pedido mínimo da IZY (30 un) é maior.</li>
-      <li><b>Vs. Cadeiras Brasil Tropical:</b> cadeira reforçada para até 130 kg (a maior capacidade do comparativo) e é a única com <b>ombrelone de madeira</b> de 3 m — mas custa 81% a mais que a AMVC na cadeira e 37% a mais no guarda-sol, com frete ainda a combinar (não incluso).</li>
-      <li><b>Vs. Sungap:</b> a Sungap é a única com garantia formal (3 meses) documentada, o que justifica o preço mais alto para quem prioriza isso — mas custa de 2x a 3,3x mais por unidade nos itens equivalentes.</li>
+      <li><b>Se o critério for material garantido nos dois itens:</b> AMVC — alumínio confirmado em cadeira e guarda-sol, combo de R$ 252,80, sem precisar de pedido grande.</li>
+      <li><b>Se o preço do guarda-sol pesar mais que a garantia do material:</b> IZY Brindes fica mais barata no mesmo porte (~1,6 m) — vale pedir confirmação do material da armação antes de fechar, e considerar que o pedido mínimo sobe para 30 un.</li>
+      <li><b>Vs. Cadeiras Brasil Tropical:</b> cadeira reforçada para até 130 kg (a maior capacidade do comparativo) e única com <b>ombrelone de madeira</b> de 3 m — mas custa 81% a mais que a AMVC na cadeira; o guarda-sol dela é 2,0 m, porte maior que o da AMVC, então parte do preço mais alto vem do tamanho, não é uma comparação direta.</li>
+      <li><b>Vs. Sungap:</b> única com garantia formal (3 meses) documentada — mas custa de 2x a 3,3x mais por unidade nos itens equivalentes, e o tamanho do guarda-sol cotado (1,6 ou 2,0 m) não foi especificado na proposta.</li>
     </ul>
     <div class="alt-note">
-      <p class="alt-line"><b>Se o lote for grande (100+ un) e aço não for problema:</b> IZY Brindes fica mais barata ainda no guarda-sol (R$ 58,86–81,20/un).</p>
-      <p class="alt-line"><b>Se precisar de ombrelone grande (3 m+) para eventos:</b> Cadeiras Brasil Tropical (R$ 460,00) sai mais barato que o Solasol 240 da Sungap (R$ 509,50) — e aceita Pix com 5% de desconto adicional.</p>
+      <p class="alt-line"><b>Se o lote for grande (100+ un) e o material da armação não for problema:</b> a linha de aço da IZY é ainda mais barata (R$ 58,86–92,10), mas sem tamanho informado — pedir essa confirmação antes de comprar.</p>
+      <p class="alt-line"><b>Se precisar de ombrelone grande (3 m+) para eventos:</b> Cadeiras Brasil Tropical (R$ 460,00) sai mais barato que o Solasol 240 da Sungap (R$ 509,50, tamanho da cotação também não especificado) — e aceita Pix com 5% de desconto adicional.</p>
       <p class="alt-line"><b>Se garantia formal for pré-requisito:</b> Sungap é a única opção que documenta isso — vale negociar volume para baixar o preço por unidade.</p>
     </div>
   </div>
