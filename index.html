@@ -263,14 +263,21 @@
     background:var(--surface-2);
   }
   tbody tr:last-child td{border-bottom:none;}
-  td.row-label{font-weight:600;}
+  td.row-label{
+    font-weight:600;
+    vertical-align:middle;
+    background:var(--surface-2);
+    color:var(--accent);
+  }
+  td.fornecedor{font-weight:600;white-space:nowrap;}
+  tr.group-start td{border-top:2px solid var(--line);}
   td.best{
     color:var(--good);
     font-weight:700;
     font-family:'IBM Plex Mono',monospace;
     font-variant-numeric:tabular-nums;
   }
-  td.mono{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;}
+  td.mono{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;white-space:nowrap;}
 
   /* verdict */
   .verdict{
@@ -458,53 +465,69 @@
 
 <section>
   <h2>Comparativo lado a lado</h2>
-  <p class="section-note">Preço por unidade nos lotes mais próximos entre os três fornecedores. Menor preço de cada linha em verde.</p>
+  <p class="section-note">Uma linha por opção de cada fornecedor. Menor valor de cada item em verde.</p>
   <div class="table-wrap">
     <table>
       <thead>
         <tr>
           <th>Item</th>
-          <th>AMVC Lar e Lazer</th>
-          <th>IZY Brindes</th>
-          <th>Sungap</th>
+          <th>Fornecedor</th>
+          <th>Descrição</th>
+          <th>Valor</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="row-label">Cadeira de praia — un.</td>
+        <tr class="group-start">
+          <td class="row-label" rowspan="5">Cadeira de praia</td>
+          <td class="fornecedor">AMVC Lar e Lazer</td>
+          <td>Cadeira Beach Alumínio Personalizada, 1 cor</td>
           <td class="best">R$ 92,90</td>
-          <td class="mono">R$ 99,89 – 109,41</td>
+        </tr>
+        <tr>
+          <td class="fornecedor">IZY Brindes</td>
+          <td>Cadeira Alta Alumínio — 30 peças</td>
+          <td class="mono">R$ 99,89</td>
+        </tr>
+        <tr>
+          <td class="fornecedor">IZY Brindes</td>
+          <td>Cadeira Alta Alumínio — 50 peças</td>
+          <td class="mono">R$ 109,41</td>
+        </tr>
+        <tr>
+          <td class="fornecedor">Sungap</td>
+          <td>Cadeira Alta Fixa Dura+ — alumínio, até 100 kg, garantia 3 meses, 10 un</td>
           <td class="mono">R$ 210,00</td>
         </tr>
         <tr>
-          <td class="row-label">Guarda-sol — un.</td>
+          <td class="fornecedor">Sungap</td>
+          <td>Cadeira Reclinável Dura+ — 10 un</td>
+          <td class="mono">R$ 295,43</td>
+        </tr>
+        <tr class="group-start">
+          <td class="row-label" rowspan="5">Guarda-sol</td>
+          <td class="fornecedor">AMVC Lar e Lazer</td>
+          <td>Sombrabella Alumínio — 1,6 m, 4 gomos, 1 cor</td>
           <td class="mono">R$ 159,90</td>
-          <td class="best">R$ 58,86 – 113,72</td>
+        </tr>
+        <tr>
+          <td class="fornecedor">IZY Brindes</td>
+          <td>Poliéster 170T — 30 / 50 / 100 peças</td>
+          <td class="mono">R$ 113,72 / 97,15 / 81,20</td>
+        </tr>
+        <tr>
+          <td class="fornecedor">IZY Brindes</td>
+          <td>Aço, 4 gomos — 30 pç (1 gomo) / 50 pç (4 gomos)</td>
+          <td class="best">R$ 92,10 / 58,86</td>
+        </tr>
+        <tr>
+          <td class="fornecedor">Sungap</td>
+          <td>Ultrafort 200 — 1,60 / 2,00 m, 10 un</td>
           <td class="mono">R$ 316,17</td>
         </tr>
         <tr>
-          <td class="row-label">Material</td>
-          <td class="mono">Alumínio (ambos)</td>
-          <td class="mono">Alumínio (cadeira) · aço ou poliéster (guarda-sol)</td>
-          <td class="mono">Alumínio (ambos)</td>
-        </tr>
-        <tr>
-          <td class="row-label">Garantia</td>
-          <td class="mono">Não informado</td>
-          <td class="mono">Não informado</td>
-          <td class="best">3 meses</td>
-        </tr>
-        <tr>
-          <td class="row-label">Pedido mínimo</td>
-          <td class="best">12–18 un</td>
-          <td class="mono">30 un</td>
-          <td class="mono">10 un/item</td>
-        </tr>
-        <tr>
-          <td class="row-label">Cadeira + guarda-sol combo</td>
-          <td class="best">R$ 252,80</td>
-          <td class="mono">R$ 181,09 – 223,13</td>
-          <td class="mono">R$ 526,17</td>
+          <td class="fornecedor">Sungap</td>
+          <td>Ombrelone Solasol 240 — 2,40 / 3,00 / 4,00 m, 10 un</td>
+          <td class="mono">R$ 509,50</td>
         </tr>
       </tbody>
     </table>
