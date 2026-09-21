@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guarda-sóis e Cadeiras</title>
+<style>
+  html{color-scheme:light dark;}
+  body{margin:0;}
+  :root{
+    --bg:#FAF7EF;
+    --surface:#FFFFFF;
+    --surface-2:#F1EAD9;
+    --ink:#1C2B39;
+    --ink-soft:#57697A;
+    --accent:#0E6F8E;
+    --accent-warm:#DD7B3A;
+    --line:#E3D9C2;
+    --good:#3E8E5A;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0E1820;
+      --surface:#16232E;
+      --surface-2:#1C2B37;
+      --ink:#EDE7D9;
+      --ink-soft:#9FB0BC;
+      --accent:#5BC2E6;
+      --accent-warm:#F0985E;
+      --line:#2A3B47;
+      --good:#6FCB8F;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0E1820;
+    --surface:#16232E;
+    --surface-2:#1C2B37;
+    --ink:#EDE7D9;
+    --ink-soft:#9FB0BC;
+    --accent:#5BC2E6;
+    --accent-warm:#F0985E;
+    --line:#2A3B47;
+    --good:#6FCB8F;
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    padding-inline:20px;
+    padding-block:40px;
+    max-width:1120px;
+    margin:0 auto;
+  }
+  .mono{font-family:'IBM Plex Mono',ui-monospace,monospace;}
+
+  header.page{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:36px;
+    padding-bottom:28px;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:600;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(28px,4vw,42px);
+    line-height:1.08;
+    margin:0;
+    text-wrap:balance;
+    letter-spacing:-.01em;
+  }
+  .subhead{
+    color:var(--ink-soft);
+    font-size:15.5px;
+    max-width:62ch;
+    line-height:1.55;
+    margin:0;
+  }
+  .meta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:6px;
+  }
+  .meta-pill{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    background:var(--surface-2);
+    border:1px solid var(--line);
+    border-radius:100px;
+    padding:5px 12px;
+  }
+
+  section{margin-bottom:44px;}
+  h2{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:22px;
+    margin:0 0 4px;
+  }
+  .section-note{
+    color:var(--ink-soft);
+    font-size:14px;
+    margin:0 0 20px;
+  }
+
+  /* supplier cards */
+  .suppliers{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:20px;
+  }
+  .card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:16px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+  }
+  .card.winner{
+    border-color:var(--accent-warm);
+    box-shadow:0 0 0 1.5px var(--accent-warm);
+  }
+  .winner-tag{
+    position:absolute;
+    top:14px;
+    right:14px;
+    background:var(--accent-warm);
+    color:#fff;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.04em;
+    padding:4px 10px;
+    border-radius:100px;
+    text-transform:uppercase;
+    z-index:2;
+  }
+  .card-head{
+    padding:18px 20px 14px;
+    border-bottom:1px solid var(--line);
+  }
+  .supplier-name{
+    font-family:'Fraunces',serif;
+    font-size:19px;
+    font-weight:600;
+    margin:0 0 2px;
+  }
+  .supplier-loc{
+    color:var(--ink-soft);
+    font-size:13px;
+    margin:0;
+  }
+  .photo-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:var(--line);
+  }
+  .photo-cell{
+    background:var(--surface-2);
+    aspect-ratio:1/1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    position:relative;
+  }
+  .photo-cell img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
+  }
+  .photo-label{
+    position:absolute;
+    bottom:6px;
+    left:6px;
+    background:rgba(28,43,57,.72);
+    color:#fff;
+    font-size:10.5px;
+    padding:2px 7px;
+    border-radius:100px;
+    font-family:'IBM Plex Mono',monospace;
+  }
+  .price-list{
+    list-style:none;
+    margin:0;
+    padding:16px 20px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    flex:1;
+  }
+  .price-line{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:12px;
+    font-size:14px;
+  }
+  .price-line .label{color:var(--ink);}
+  .price-line .qty{color:var(--ink-soft);font-size:12px;display:block;margin-top:1px;}
+  .price-line .value{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600;
+    white-space:nowrap;
+    font-variant-numeric:tabular-nums;
+  }
+  .card-terms{
+    padding:14px 20px 18px;
+    border-top:1px solid var(--line);
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px 14px;
+  }
+  .term{
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+  .term b{color:var(--ink);font-weight:600;}
+
+  /* comparative table */
+  .table-wrap{
+    overflow-x:auto;
+    border:1px solid var(--line);
+    border-radius:14px;
+    background:var(--surface);
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14px;
+    min-width:640px;
+  }
+  th,td{
+    text-align:left;
+    padding:12px 16px;
+    border-bottom:1px solid var(--line);
+  }
+  thead th{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    color:var(--ink-soft);
+    font-weight:600;
+    background:var(--surface-2);
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  td.row-label{font-weight:600;}
+  td.best{
+    color:var(--good);
+    font-weight:700;
+    font-family:'IBM Plex Mono',monospace;
+    font-variant-numeric:tabular-nums;
+  }
+  td.mono{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;}
+
+  /* verdict */
+  .verdict{
+    background:linear-gradient(155deg,var(--surface-2),var(--surface));
+    border:1px solid var(--accent-warm);
+    border-radius:18px;
+    padding:28px 28px 26px;
+  }
+  .verdict-eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--accent-warm);
+    font-weight:700;
+    margin-bottom:8px;
+  }
+  .verdict h3{
+    font-family:'Fraunces',serif;
+    font-size:24px;
+    margin:0 0 12px;
+  }
+  .verdict p{
+    font-size:15px;
+    line-height:1.65;
+    color:var(--ink);
+    max-width:74ch;
+    margin:0 0 14px;
+  }
+  .verdict ul{
+    margin:0 0 14px;
+    padding-left:20px;
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+  }
+  .verdict li{font-size:14.5px;line-height:1.5;}
+  .alt-note{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin-top:16px;
+    padding-top:16px;
+    border-top:1px solid var(--line);
+  }
+  .alt-line{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    line-height:1.5;
+  }
+  .alt-line b{color:var(--ink);}
+
+  footer{
+    margin-top:8px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+    color:var(--ink-soft);
+    font-size:12.5px;
+    line-height:1.6;
+  }
+
+  @media (max-width:520px){
+    .photo-row{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="page">
+  <span class="eyebrow">Franquias · Lojinha Seazone</span>
+  <h1>Guarda-sóis e cadeiras de praia personalizados</h1>
+  <p class="subhead">Comparativo dos três orçamentos recebidos para o item da Lojinha — fotos, preços e condições de cada fornecedor, lado a lado, com a indicação de melhor custo-benefício ao final.</p>
+  <div class="meta-row">
+    <span class="meta-pill">3 fornecedores</span>
+    <span class="meta-pill">Fonte: orçamentos no Slack</span>
+    <span class="meta-pill">Responsável: Wania Lageano</span>
+  </div>
+</header>
+
+<section>
+  <h2>Os orçamentos</h2>
+  <p class="section-note">Fotos e condições exatamente como enviadas pelos fornecedores.</p>
+
+  <div class="suppliers">
+
+    <article class="card winner">
+      <span class="winner-tag">Melhor custo-benefício</span>
+      <div class="card-head">
+        <p class="supplier-name">AMVC Lar e Lazer</p>
+        <p class="supplier-loc">Caxias do Sul — RS</p>
+      </div>
+      <div class="photo-row">
+        <div class="photo-cell"><img src="images/amvc-cadeira.png" alt="Cadeira Beach Alumínio Personalizada AMVC"><span class="photo-label">cadeira</span></div>
+        <div class="photo-cell"><img src="images/amvc-guardasol.png" alt="Guarda-sol Sombrabella Alumínio Personalizado AMVC"><span class="photo-label">guarda-sol</span></div>
+      </div>
+      <ul class="price-list">
+        <li class="price-line">
+          <span class="label">Cadeira Beach Alumínio<span class="qty">personalizada, 1 cor</span></span>
+          <span class="value">R$ 92,90</span>
+        </li>
+        <li class="price-line">
+          <span class="label">Guarda-sol Sombrabella Alumínio<span class="qty">1,6 m · 4 gomos · 1 cor</span></span>
+          <span class="value">R$ 159,90</span>
+        </li>
+      </ul>
+      <div class="card-terms">
+        <span class="term"><b>Pedido mín.</b> 12–18 un</span>
+        <span class="term"><b>Prazo</b> 30–35 dias</span>
+        <span class="term"><b>Pagto</b> 50% + 50%</span>
+        <span class="term"><b>Frete</b> por conta do cliente</span>
+        <span class="term"><b>Validade</b> 5 dias</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-head">
+        <p class="supplier-name">IZY Brindes</p>
+        <p class="supplier-loc">Orçamento por WhatsApp/Slack</p>
+      </div>
+      <div class="photo-row">
+        <div class="photo-cell"><img src="images/izy-cadeira.png" alt="Cadeira Alta Alumínio IZY Brindes"><span class="photo-label">cadeira</span></div>
+        <div class="photo-cell"><img src="images/izy-guardasol.png" alt="Guarda-sol poliéster 170T IZY Brindes"><span class="photo-label">guarda-sol</span></div>
+      </div>
+      <ul class="price-list">
+        <li class="price-line">
+          <span class="label">Cadeira Alta Alumínio<span class="qty">30 peças</span></span>
+          <span class="value">R$ 99,89</span>
+        </li>
+        <li class="price-line">
+          <span class="label">Cadeira Alta Alumínio<span class="qty">50 peças</span></span>
+          <span class="value">R$ 109,41</span>
+        </li>
+        <li class="price-line">
+          <span class="label">Guarda-sol poliéster 170T<span class="qty">30 / 50 / 100 peças</span></span>
+          <span class="value">R$113,72 / 97,15 / 81,20</span>
+        </li>
+        <li class="price-line">
+          <span class="label">Guarda-sol de aço, 4 gomos<span class="qty">30 pç (1 gomo) / 50 pç (4 gomos)</span></span>
+          <span class="value">R$ 92,10 / 58,86</span>
+        </li>
+      </ul>
+      <div class="card-terms">
+        <span class="term"><b>Pedido mín.</b> 30 un</span>
+        <span class="term"><b>Personalização</b> 1 gomo incluso, extra R$2,00/gomo</span>
+        <span class="term"><b>Prazo / garantia</b> não informado</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-head">
+        <p class="supplier-name">Sungap</p>
+        <p class="supplier-loc">sungap.com.br — vend. Leticia Castro</p>
+      </div>
+      <div class="photo-row">
+        <div class="photo-cell"><img src="images/sungap-cadeira.png" alt="Cadeira de Praia Alta Fixa Dura+ Sungap"><span class="photo-label">cadeira</span></div>
+        <div class="photo-cell"><img src="images/sungap-guardasol.png" alt="Guarda-Sol Ultrafort Sungap"><span class="photo-label">guarda-sol</span></div>
+      </div>
+      <ul class="price-list">
+        <li class="price-line">
+          <span class="label">Cadeira Alta Fixa Dura+<span class="qty">alumínio · até 100kg · 10 un</span></span>
+          <span class="value">R$ 210,00</span>
+        </li>
+        <li class="price-line">
+          <span class="label">Cadeira Reclinável Dura+<span class="qty">10 un</span></span>
+          <span class="value">R$ 295,43</span>
+        </li>
+        <li class="price-line">
+          <span class="label">Guarda-Sol Ultrafort 200<span class="qty">1,60 / 2,00 m · 10 un</span></span>
+          <span class="value">R$ 316,17</span>
+        </li>
+        <li class="price-line">
+          <span class="label">Ombrelone Solasol 240<span class="qty">2,40 / 3,00 / 4,00 m · 10 un</span></span>
+          <span class="value">R$ 509,50</span>
+        </li>
+      </ul>
+      <div class="card-terms">
+        <span class="term"><b>Pedido mín.</b> 10 un/item</span>
+        <span class="term"><b>Garantia</b> 3 meses</span>
+        <span class="term"><b>Total do orçamento</b> R$ 13.311,00 (40 peças)</span>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section>
+  <h2>Comparativo lado a lado</h2>
+  <p class="section-note">Preço por unidade nos lotes mais próximos entre os três fornecedores. Menor preço de cada linha em verde.</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>AMVC Lar e Lazer</th>
+          <th>IZY Brindes</th>
+          <th>Sungap</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="row-label">Cadeira de praia — un.</td>
+          <td class="best">R$ 92,90</td>
+          <td class="mono">R$ 99,89 – 109,41</td>
+          <td class="mono">R$ 210,00</td>
+        </tr>
+        <tr>
+          <td class="row-label">Guarda-sol — un.</td>
+          <td class="mono">R$ 159,90</td>
+          <td class="best">R$ 58,86 – 113,72</td>
+          <td class="mono">R$ 316,17</td>
+        </tr>
+        <tr>
+          <td class="row-label">Material</td>
+          <td class="mono">Alumínio (ambos)</td>
+          <td class="mono">Alumínio (cadeira) · aço ou poliéster (guarda-sol)</td>
+          <td class="mono">Alumínio (ambos)</td>
+        </tr>
+        <tr>
+          <td class="row-label">Garantia</td>
+          <td class="mono">Não informado</td>
+          <td class="mono">Não informado</td>
+          <td class="best">3 meses</td>
+        </tr>
+        <tr>
+          <td class="row-label">Pedido mínimo</td>
+          <td class="best">12–18 un</td>
+          <td class="mono">30 un</td>
+          <td class="mono">10 un/item</td>
+        </tr>
+        <tr>
+          <td class="row-label">Cadeira + guarda-sol combo</td>
+          <td class="best">R$ 252,80</td>
+          <td class="mono">R$ 181,09 – 223,13</td>
+          <td class="mono">R$ 526,17</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section style="margin-bottom:8px;">
+  <div class="verdict">
+    <p class="verdict-eyebrow">Recomendação</p>
+    <h3>AMVC Lar e Lazer tem o melhor custo-benefício</h3>
+    <p>Entre os três, é a única que entrega <b>alumínio nos dois itens</b> — cadeira e guarda-sol — com pedido mínimo baixo (12 a 18 unidades) e preço combinado de <b>R$ 252,80</b> por conjunto, quase a metade do valor da Sungap (R$ 526,17) pela mesma qualidade de material.</p>
+    <ul>
+      <li><b>Vs. IZY Brindes:</b> a IZY vence em preço bruto do guarda-sol, mas só nesse valor com a linha de <b>aço</b> — material mais sujeito a ferrugem/maresia num item que fica exposto na praia. Na linha em alumínio/poliéster equivalente, a diferença para a AMVC cai bastante, e o pedido mínimo da IZY (30 un) é maior.</li>
+      <li><b>Vs. Sungap:</b> a Sungap é a única com garantia formal (3 meses) e capacidade de carga especificada (100 kg), o que justifica o preço mais alto para quem prioriza durabilidade documentada — mas custa de 2x a 3,3x mais por unidade nos itens equivalentes.</li>
+    </ul>
+    <div class="alt-note">
+      <p class="alt-line"><b>Se o lote for grande (100+ un) e aço não for problema:</b> IZY Brindes fica mais barata ainda no guarda-sol (R$ 58,86–81,20/un).</p>
+      <p class="alt-line"><b>Se garantia formal for pré-requisito:</b> Sungap é a única opção que documenta isso — vale negociar volume para baixar o preço por unidade.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Preços e condições coletados dos orçamentos recebidos via Slack (mensagens de w.lageano, set/2026). Valores sujeitos à validade informada por cada fornecedor — AMVC e IZY não especificaram prazo de garantia nas mensagens capturadas.
+</footer>
+
+</body>
+</html>
